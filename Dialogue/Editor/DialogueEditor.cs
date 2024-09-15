@@ -2,6 +2,8 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 
 namespace TPlus.Dialogue.Editor
 {
@@ -19,6 +21,7 @@ namespace TPlus.Dialogue.Editor
         private static string _newDialogueName;
         private static Texture2D _npcNodeTexture;
         private static Texture2D _playerNodeTexture;
+        private static Texture2D _conditionNodeTexture;
 
         private static DialogueNode _draggingNode;
         private static DialogueNode _connectingNode;
@@ -40,6 +43,7 @@ namespace TPlus.Dialogue.Editor
             Selection.selectionChanged += SelectionChanged;
             _playerNodeTexture = MakeColoredTexture(20, 20, Color.blue);
             _npcNodeTexture = MakeColoredTexture(20, 20, Color.gray);
+            _conditionNodeTexture = MakeColoredTexture(20, 20, Color.yellow);
             _nodeStyle = new GUIStyle();
             _nodeStyle.padding = new RectOffset(20, 20, 20, 20);
             _nodeStyle.border = new RectOffset(12,12, 12, 12);
@@ -203,12 +207,12 @@ namespace TPlus.Dialogue.Editor
             }
             else if (!_creatingDialogue)
             {
+                DrawCreateConditionNodeButton();
                 HandleZoomInput(_dialogue);
                 ProcessEvents();
                 HandleScrollView();
                 DrawBackground();
                 CreateNodesDisplay();
-
                 
                 var oldMatrix = GUI.matrix;
 
@@ -217,6 +221,14 @@ namespace TPlus.Dialogue.Editor
                 EditorGUILayout.EndScrollView();
 
                 GUI.matrix = oldMatrix;
+            }
+        }
+
+        private void DrawCreateConditionNodeButton()
+        {
+            if (GUILayout.Button("Create new condition node"))
+            {
+                CreateConditionNode();
             }
         }
 
@@ -307,17 +319,9 @@ namespace TPlus.Dialogue.Editor
 
         private static void DrawNode(DialogueNode node)
         {
-            //Create visual square in editor for each node in dialogue
-            var oldRect = node.Transform;
-            var scaledRect = new Rect(oldRect.x * _dialogue.EditorZoomAmount, oldRect.y * _dialogue.EditorZoomAmount, oldRect.width * _dialogue.EditorZoomAmount, oldRect.height * _dialogue.EditorZoomAmount);
-
-            var newNodeStyle = _nodeStyle;
-            newNodeStyle.normal.background = node.IsPlayerNode ? _playerNodeTexture : _npcNodeTexture;
-
-            GUILayout.BeginArea(scaledRect, newNodeStyle);
-
             EditorGUI.BeginChangeCheck();
-            GenerateTextFields(node, out var newText);
+            
+            DetermineNodeDisplayType(node);
 
             DrawLinkButton(node);
             DrawUnlinkButton(node);
@@ -327,20 +331,57 @@ namespace TPlus.Dialogue.Editor
             {
                 DrawCreateNodeButton(node);
                 DrawDeleteButton(node);
-                DrawIsPlayerNodeButton(node);
-                DrawNodeConditions(node);
             }
 
             if (EditorGUI.EndChangeCheck())
             {
-                SaveNodeChanges(node, newText);
+                SaveNodeChanges(node);
             }
 
             GUILayout.EndArea();
         }
 
+        private static void DrawNodeBackground(DialogueNode node, GUIStyle nodeStyle)
+        {
+            //Create visual square in editor for each node in dialogue
+            var oldRect = node.Transform;
+            var scaledRect = new Rect(oldRect.x * _dialogue.EditorZoomAmount, oldRect.y * _dialogue.EditorZoomAmount,
+                oldRect.width * _dialogue.EditorZoomAmount, oldRect.height * _dialogue.EditorZoomAmount);
+            GUILayout.BeginArea(scaledRect, nodeStyle);
+        }
+
+        private static void DetermineNodeDisplayType(DialogueNode node)
+        {
+            if (node is DialogueNode_Text textNode)
+            {
+                DrawTextNode(textNode);
+            }
+            else if (node is DialogueNode_Condition conditionNode)
+            {
+                DrawConditionNode(conditionNode);
+            }
+        }
+
+        private static void DrawTextNode(DialogueNode_Text node)
+        {
+            var newNodeStyle = _nodeStyle;
+            newNodeStyle.normal.background = node.IsPlayerNode ? _playerNodeTexture : _npcNodeTexture;
+            DrawNodeBackground(node, newNodeStyle);
+            GenerateTextFields(node);
+            DrawIsPlayerNodeButton(node);
+        }
+
+        private static void DrawConditionNode(DialogueNode_Condition conditionNode)
+        {
+            var newNodeStyle = _nodeStyle;
+            newNodeStyle.normal.background = _conditionNodeTexture;
+            DrawNodeBackground(conditionNode, _nodeStyle);
+            DrawNodeConditions(conditionNode);
+        }
+
         private static void DrawNodeConditions(DialogueNode node)
         {
+
             var serializedNode = new SerializedObject(node);
             EditorGUILayout.PropertyField(serializedNode.FindProperty("Conditions"), true);
             serializedNode.ApplyModifiedProperties();
@@ -360,7 +401,7 @@ namespace TPlus.Dialogue.Editor
             if (GUILayout.Button("+"))
             {
                 Undo.RecordObject(_dialogue, "add node");
-                _dialogue.CreateChildNode(node);
+                _dialogue.CreateChildTextNode(node);
             }
         }
 
@@ -417,8 +458,11 @@ namespace TPlus.Dialogue.Editor
             start.x = node.Transform.xMax;
             start *= _dialogue.EditorZoomAmount;
 
-            foreach (var childNode in _dialogue.GetAllChildren(node))
+            var children = new List<DialogueNode>(_dialogue.GetAllChildren(node));
+
+            for (int i = children.Count - 1; i >= 0; i--)
             {
+                var childNode = children[i];
                 var vectorToChild = node.Transform.position - childNode.Transform.position;
                 var offsetPoint = vectorToChild * 0.5f;
                 offsetPoint.y = 0;
@@ -427,27 +471,39 @@ namespace TPlus.Dialogue.Editor
                 var end = childNode.Transform.center;
                 end.x = childNode.Transform.xMin;
                 end *= _dialogue.EditorZoomAmount;
-                Handles.DrawBezier(start, end, start - offsetPoint, end + offsetPoint, Color.white, null, 4f * _dialogue.EditorZoomAmount);
+                Handles.DrawBezier(start, end, start - offsetPoint, end + offsetPoint, DetermineConnectionColor(node, i), null, 4f * _dialogue.EditorZoomAmount);
             }
         }
 
-        private static void DrawIsPlayerNodeButton(DialogueNode node)
+        private static Color DetermineConnectionColor(DialogueNode node, int child)
+        {
+            if (node is DialogueNode_Condition conditionNode)
+            {
+                if (child == 0)
+                {
+                    return Color.green;
+                }
+                return Color.red;
+            }
+            return Color.white;
+        }
+
+        private static void DrawIsPlayerNodeButton(DialogueNode_Text node)
         {
             node.IsPlayerNode = GUILayout.Toggle(node.IsPlayerNode, "Is player node");
         }
 
-        private static void GenerateTextFields(DialogueNode node, out string newText)
+        private static void GenerateTextFields(DialogueNode_Text node)
         {
             //Generates labels and text inputs for node information
             EditorGUILayout.LabelField("Node Text:");
-            newText = EditorGUILayout.TextField(node.DialogueText);
+            node.Text = EditorGUILayout.TextField(node.Text);
         }
         #endregion
 
-        private static void SaveNodeChanges(DialogueNode node, string newText)
+        private static void SaveNodeChanges(DialogueNode node)
         {
-            Undo.RecordObject(_dialogue, "Update dialogue node text");
-            node.DialogueText = newText;
+            Undo.RecordObject(_dialogue, "Update dialogue node");
             EditorUtility.SetDirty(node);
             AssetDatabase.SaveAssets();
         }
@@ -461,6 +517,11 @@ namespace TPlus.Dialogue.Editor
                 return true;
             }
             return false;
+        }
+
+        private static void CreateConditionNode()
+        {
+            _dialogue.CreateNewConditionNode();
         }
     }
 }

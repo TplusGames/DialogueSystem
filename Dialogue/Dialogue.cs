@@ -43,22 +43,34 @@ namespace TPlus.Dialogue
 
         public void CreateRootNode()
         {
-            var rootNode = CreateNewNode(false);
+            var rootNode = CreateNewTextNode();
         }
 
-        public DialogueNode CreateNewNode(bool isPlayerNode)
+        public DialogueNode CreateNewTextNode()
         {
             var randomID = Guid.NewGuid().ToString();
-            DialogueNode node = CreateInstance(nameof(DialogueNode)) as DialogueNode;
+            DialogueNode_Text node = CreateInstance(nameof(DialogueNode_Text)) as DialogueNode_Text;
+            InitializeNodeAsset(node);
+            return node;
+        }
+
+        public DialogueNode_Condition CreateNewConditionNode()
+        {
+            DialogueNode_Condition node = CreateInstance(nameof(DialogueNode_Condition)) as DialogueNode_Condition;
+            InitializeNodeAsset(node);
+            return node;
+        }
+
+        private void InitializeNodeAsset(DialogueNode node)
+        {
+            var randomID = Guid.NewGuid().ToString();
             node.UniqueID = randomID;
             node.name = randomID;
-            node.IsPlayerNode = isPlayerNode;
             nodes.Add(node);
             AssetDatabase.AddObjectToAsset(node, this);
             AssetDatabase.SaveAssets();
             UpdateDictionary();
             Undo.RegisterCreatedObjectUndo(node, "create node");
-            return node;
         }
 
         public void DeleteNode(DialogueNode node)
@@ -82,10 +94,9 @@ namespace TPlus.Dialogue
             UpdateDictionary();
         }
 
-        public void CreateChildNode(DialogueNode parent)
+        public void CreateChildTextNode(DialogueNode parent)
         {
-            var isPlayerNode = !parent.IsPlayerNode;
-            var childNode = CreateNewNode(isPlayerNode);
+            var childNode = CreateNewTextNode();
             parent.AddChildNode(childNode.name);
             var nodeWidth = (parent.Transform.xMax - parent.Transform.center.x) * 2;
             var childPosition = parent.Transform.position + new Vector2(nodeWidth * 1.5f, 0);

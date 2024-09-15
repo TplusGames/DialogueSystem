@@ -8,11 +8,7 @@ namespace TPlus.Dialogue
     public class DialogueNode : ScriptableObject
     {
         public string UniqueID;
-        public string DialogueText;
         public List<string> ChildNodes = new List<string>();
-        public List<DialogueCondition> Conditions = new List<DialogueCondition>();
-
-        public bool IsPlayerNode;
 
         public Rect Transform = new Rect(0, 0, 300, 250);
 
@@ -35,6 +31,14 @@ namespace TPlus.Dialogue
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
         }
+
+        public virtual void SaveNodeChanges()
+        {
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssetIfDirty(this);
+        }
+
+        public virtual IEnumerator<string> GetAllChildren() { return ChildNodes.GetEnumerator(); }
     }
 }
 
