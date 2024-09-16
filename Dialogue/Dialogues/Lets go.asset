@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: Lets go
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 1808396108792866461}
+  - {fileID: 5557825735107453437}
+  EditorZoomAmount: 0.9090095
+  EditorScrollPosition: {x: 0, y: 14}
+--- !u!114 &1808396108792866461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: a6867381-65de-4495-9ba4-52b1f3ea1c9b
+  m_EditorClassIdentifier: 
+  UniqueID: a6867381-65de-4495-9ba4-52b1f3ea1c9b
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 159
+    y: 91
+    width: 300
+    height: 250
+  Text: 
+  IsPlayerNode: 0
+--- !u!114 &5557825735107453437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef9b5d1533fb1347be68a0adafea138, type: 3}
+  m_Name: bd069e33-21bd-4d55-99de-d8338b44d351
+  m_EditorClassIdentifier: 
+  UniqueID: bd069e33-21bd-4d55-99de-d8338b44d351
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 663
+    y: 89
+    width: 300
+    height: 250
+  Conditions: []

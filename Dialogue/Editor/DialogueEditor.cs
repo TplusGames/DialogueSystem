@@ -40,36 +40,57 @@ namespace TPlus.Dialogue.Editor
         #region Initialization
         private void OnEnable()
         {
+            // Reinitialize textures and styles when window is enabled or after recompilation
+            InitializeTexturesAndStyles();
+
+            // Subscribe to play mode changes
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
+            // Existing code for selection change...
             Selection.selectionChanged += SelectionChanged;
+        }
+
+        private void OnDisable()
+        {
+            // Unsubscribe from play mode changes
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+
+            // Existing code for selection change...
+            Selection.selectionChanged -= SelectionChanged;
+        }
+
+        private void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.ExitingPlayMode)
+            {
+                // Reinitialize textures and styles when re-entering Edit mode
+                InitializeTexturesAndStyles();
+            }
+        }
+
+        private void InitializeTexturesAndStyles()
+        {
             _playerNodeTexture = MakeColoredTexture(20, 20, Color.blue);
             _npcNodeTexture = MakeColoredTexture(20, 20, Color.gray);
             _conditionNodeTexture = MakeColoredTexture(20, 20, Color.yellow);
-            _nodeStyle = new GUIStyle();
-            _nodeStyle.padding = new RectOffset(20, 20, 20, 20);
-            _nodeStyle.border = new RectOffset(12,12, 12, 12);
+            _nodeStyle = new GUIStyle
+            {
+                padding = new RectOffset(20, 20, 20, 20),
+                border = new RectOffset(12, 12, 12, 12)
+            };
         }
-
+        
         private static Texture2D MakeColoredTexture(int width, int height, Color color)
         {
-            // Create a new texture of the given width and height
             Texture2D texture = new Texture2D(width, height);
-
-            // Fill the texture with the specified color
             Color[] pixels = new Color[width * height];
             for (int i = 0; i < pixels.Length; i++)
             {
                 pixels[i] = color;
             }
-
             texture.SetPixels(pixels);
-            texture.Apply(); // Apply the color change to the texture
-
+            texture.Apply();
             return texture;
-        }
-
-        private void OnDisable()
-        {
-            Selection.selectionChanged -= SelectionChanged;
         }
 
         [OnOpenAssetAttribute(1)]
@@ -322,17 +343,7 @@ namespace TPlus.Dialogue.Editor
             EditorGUI.BeginChangeCheck();
             
             DetermineNodeDisplayType(node);
-
-            DrawLinkButton(node);
-            DrawUnlinkButton(node);
-
-            var isNotLinking = (_connectingNode == null && _disconnectingNode == null);
-            if (isNotLinking)
-            {
-                DrawCreateNodeButton(node);
-                DrawDeleteButton(node);
-            }
-
+            
             if (EditorGUI.EndChangeCheck())
             {
                 SaveNodeChanges(node);
@@ -344,6 +355,7 @@ namespace TPlus.Dialogue.Editor
         private static void DrawNodeBackground(DialogueNode node, GUIStyle nodeStyle)
         {
             //Create visual square in editor for each node in dialogue
+            Debug.Log("Drawing node backgroun");
             var oldRect = node.Transform;
             var scaledRect = new Rect(oldRect.x * _dialogue.EditorZoomAmount, oldRect.y * _dialogue.EditorZoomAmount,
                 oldRect.width * _dialogue.EditorZoomAmount, oldRect.height * _dialogue.EditorZoomAmount);
@@ -369,6 +381,10 @@ namespace TPlus.Dialogue.Editor
             DrawNodeBackground(node, newNodeStyle);
             GenerateTextFields(node);
             DrawIsPlayerNodeButton(node);
+            
+            var isNotLinking = (_connectingNode == null && _disconnectingNode == null);
+            DrawCreateAndDeleteButton(node, isNotLinking);
+            DrawLinkingButtons(node, true);
         }
 
         private static void DrawConditionNode(DialogueNode_Condition conditionNode)
@@ -376,12 +392,18 @@ namespace TPlus.Dialogue.Editor
             var newNodeStyle = _nodeStyle;
             newNodeStyle.normal.background = _conditionNodeTexture;
             DrawNodeBackground(conditionNode, _nodeStyle);
+            
             DrawNodeConditions(conditionNode);
+            
+            var isLinking = _connectingNode == null && _disconnectingNode == null;
+            DrawCreateAndDeleteButton(conditionNode, isLinking);
+
+            var canLink = conditionNode.ChildNodes.Count < 2;
+            DrawLinkingButtons(conditionNode, canLink);
         }
 
         private static void DrawNodeConditions(DialogueNode node)
         {
-
             var serializedNode = new SerializedObject(node);
             EditorGUILayout.PropertyField(serializedNode.FindProperty("Conditions"), true);
             serializedNode.ApplyModifiedProperties();
@@ -402,6 +424,24 @@ namespace TPlus.Dialogue.Editor
             {
                 Undo.RecordObject(_dialogue, "add node");
                 _dialogue.CreateChildTextNode(node);
+            }
+        }
+
+        private static void DrawLinkingButtons(DialogueNode node, bool shouldDraw)
+        {
+            if (shouldDraw)
+            {
+                DrawLinkButton(node);
+            }
+            DrawUnlinkButton(node);
+        }
+
+        private static void DrawCreateAndDeleteButton(DialogueNode node, bool shouldDraw)
+        {
+            if (shouldDraw)
+            {
+                DrawCreateNodeButton(node);
+                DrawDeleteButton(node);
             }
         }
 

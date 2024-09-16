@@ -1,0 +1,330 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8742713075162817544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef9b5d1533fb1347be68a0adafea138, type: 3}
+  m_Name: 0e062e91-5626-4e3b-a24f-1a7b31203186
+  m_EditorClassIdentifier: 
+  UniqueID: 0e062e91-5626-4e3b-a24f-1a7b31203186
+  ChildNodes:
+  - 0815dbe5-4f3b-449c-94f6-134cb4c660c2
+  - 99cc26fe-0c37-4f3d-aa52-35b88eecd640
+  Transform:
+    serializedVersion: 2
+    x: 3351.5837
+    y: 1064.1986
+    width: 300
+    height: 250
+  Conditions:
+  - {fileID: 11400000, guid: 7eb160622b0a32543b3c3ef4c4176228, type: 2}
+--- !u!114 &-8733290338085544603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: fcc447ca-3fef-442c-8ccc-2714536f0c9f
+  m_EditorClassIdentifier: 
+  UniqueID: fcc447ca-3fef-442c-8ccc-2714536f0c9f
+  ChildNodes:
+  - 80c384d6-f5ab-4cff-9422-3e30c1b44d2c
+  Transform:
+    serializedVersion: 2
+    x: 1512.1226
+    y: 850.39636
+    width: 300
+    height: 250
+  Text: Fuck you I'm getting the fuck out of here
+  IsPlayerNode: 1
+--- !u!114 &-8087434768407474444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: f37af7b0-0f54-4e93-b2f2-caec8e842663
+  m_EditorClassIdentifier: 
+  UniqueID: f37af7b0-0f54-4e93-b2f2-caec8e842663
+  ChildNodes:
+  - 1b9d0853-d920-48ab-a9a1-59fcb6e55980
+  Transform:
+    serializedVersion: 2
+    x: 1506
+    y: 399
+    width: 300
+    height: 250
+  Text: Ok. I don't have any weapons though
+  IsPlayerNode: 1
+--- !u!114 &-7256920630017511628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 99cc26fe-0c37-4f3d-aa52-35b88eecd640
+  m_EditorClassIdentifier: 
+  UniqueID: 99cc26fe-0c37-4f3d-aa52-35b88eecd640
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 3761.1228
+    y: 1258.7961
+    width: 300
+    height: 250
+  Text: Time to die friend
+  IsPlayerNode: 0
+--- !u!114 &-5466996230015656907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef9b5d1533fb1347be68a0adafea138, type: 3}
+  m_Name: 80c384d6-f5ab-4cff-9422-3e30c1b44d2c
+  m_EditorClassIdentifier: 
+  UniqueID: 80c384d6-f5ab-4cff-9422-3e30c1b44d2c
+  ChildNodes:
+  - 0815dbe5-4f3b-449c-94f6-134cb4c660c2
+  - 181ddd15-51f0-4bce-b93f-e72796d0298d
+  Transform:
+    serializedVersion: 2
+    x: 2045.6091
+    y: 873.4061
+    width: 300
+    height: 250
+  Conditions:
+  - {fileID: 11400000, guid: 7eb160622b0a32543b3c3ef4c4176228, type: 2}
+--- !u!114 &-3238563366228181758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 8bfc3ef7-92be-4e3f-9e1b-c096b352b6ff
+  m_EditorClassIdentifier: 
+  UniqueID: 8bfc3ef7-92be-4e3f-9e1b-c096b352b6ff
+  ChildNodes:
+  - 0e062e91-5626-4e3b-a24f-1a7b31203186
+  Transform:
+    serializedVersion: 2
+    x: 2928.0176
+    y: 1034.5233
+    width: 300
+    height: 250
+  Text: C'mon man just let me go!
+  IsPlayerNode: 1
+--- !u!114 &-1403879756874491634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 5d9bd05b-54ee-4ec9-af3c-e64abe50793a
+  m_EditorClassIdentifier: 
+  UniqueID: 5d9bd05b-54ee-4ec9-af3c-e64abe50793a
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 2538.8079
+    y: 440.10715
+    width: 300
+    height: 250
+  Text: Bat
+  IsPlayerNode: 1
+--- !u!114 &-4622569537874714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 0815dbe5-4f3b-449c-94f6-134cb4c660c2
+  m_EditorClassIdentifier: 
+  UniqueID: 0815dbe5-4f3b-449c-94f6-134cb4c660c2
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 3730.733
+    y: 843.0308
+    width: 300
+    height: 250
+  Text: Fine get the fuck out of here
+  IsPlayerNode: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: awdawdawd
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 439162570876015425}
+  - {fileID: 1282555598389113277}
+  - {fileID: -8087434768407474444}
+  - {fileID: -8733290338085544603}
+  - {fileID: 5095108041613536566}
+  - {fileID: 7575833504440961120}
+  - {fileID: 4854198984276957454}
+  - {fileID: -1403879756874491634}
+  - {fileID: -5466996230015656907}
+  - {fileID: -4622569537874714}
+  - {fileID: -3238563366228181758}
+  - {fileID: -8742713075162817544}
+  - {fileID: -7256920630017511628}
+  EditorZoomAmount: 0.5190201
+  EditorScrollPosition: {x: 1075, y: 372}
+--- !u!114 &439162570876015425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 13660afe-1b15-4076-b1ce-bd411f99d270
+  m_EditorClassIdentifier: 
+  UniqueID: 13660afe-1b15-4076-b1ce-bd411f99d270
+  ChildNodes:
+  - 82cd32aa-0a90-4cf3-8189-34e3727052cc
+  Transform:
+    serializedVersion: 2
+    x: 467.66672
+    y: 607.3334
+    width: 300
+    height: 250
+  Text: Hey I saw your buddies throw you out of that chopper. You boys brought alot
+    of dead coming this way!
+  IsPlayerNode: 0
+--- !u!114 &1282555598389113277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 82cd32aa-0a90-4cf3-8189-34e3727052cc
+  m_EditorClassIdentifier: 
+  UniqueID: 82cd32aa-0a90-4cf3-8189-34e3727052cc
+  ChildNodes:
+  - f37af7b0-0f54-4e93-b2f2-caec8e842663
+  - fcc447ca-3fef-442c-8ccc-2714536f0c9f
+  Transform:
+    serializedVersion: 2
+    x: 1006.0001
+    y: 650.6667
+    width: 300
+    height: 250
+  Text: You better help me fight them off or you'll be eaten alive
+  IsPlayerNode: 0
+--- !u!114 &4854198984276957454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: dcc21954-3bc2-4fca-a66c-935f3511ff0f
+  m_EditorClassIdentifier: 
+  UniqueID: dcc21954-3bc2-4fca-a66c-935f3511ff0f
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 2527.7407
+    y: 92.27715
+    width: 300
+    height: 250
+  Text: Axe
+  IsPlayerNode: 1
+--- !u!114 &5095108041613536566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 181ddd15-51f0-4bce-b93f-e72796d0298d
+  m_EditorClassIdentifier: 
+  UniqueID: 181ddd15-51f0-4bce-b93f-e72796d0298d
+  ChildNodes:
+  - 8bfc3ef7-92be-4e3f-9e1b-c096b352b6ff
+  Transform:
+    serializedVersion: 2
+    x: 2444.4143
+    y: 1112.0833
+    width: 300
+    height: 250
+  Text: We'll leave your corpse out as bait then
+  IsPlayerNode: 0
+--- !u!114 &7575833504440961120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 1b9d0853-d920-48ab-a9a1-59fcb6e55980
+  m_EditorClassIdentifier: 
+  UniqueID: 1b9d0853-d920-48ab-a9a1-59fcb6e55980
+  ChildNodes:
+  - dcc21954-3bc2-4fca-a66c-935f3511ff0f
+  - 5d9bd05b-54ee-4ec9-af3c-e64abe50793a
+  Transform:
+    serializedVersion: 2
+    x: 2044.5386
+    y: 282.00262
+    width: 300
+    height: 250
+  Text: I've got a baseball bat or an axe. Which one do you want?
+  IsPlayerNode: 0

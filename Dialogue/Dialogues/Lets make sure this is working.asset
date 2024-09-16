@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3942493955909073856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef9b5d1533fb1347be68a0adafea138, type: 3}
+  m_Name: 4f4a63ad-c114-44f9-a336-70a6121f7040
+  m_EditorClassIdentifier: 
+  UniqueID: 4f4a63ad-c114-44f9-a336-70a6121f7040
+  ChildNodes:
+  - a42ef125-7a36-428f-977d-e49a71bc5002
+  - a3bd44fc-6d4e-4037-abe7-ce607980fbef
+  Transform:
+    serializedVersion: 2
+    x: 1481.4542
+    y: 325.79025
+    width: 300
+    height: 250
+  Conditions:
+  - {fileID: 11400000, guid: 7eb160622b0a32543b3c3ef4c4176228, type: 2}
+--- !u!114 &-3784740957673259836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: a37016d7-613d-4d76-8ec2-ddbaf701fef6
+  m_EditorClassIdentifier: 
+  UniqueID: a37016d7-613d-4d76-8ec2-ddbaf701fef6
+  ChildNodes:
+  - 811c15c8-9261-4fa3-9829-d84801020b19
+  Transform:
+    serializedVersion: 2
+    x: 628
+    y: 235.81233
+    width: 300
+    height: 250
+  Text: This is just a block of NPC text
+  IsPlayerNode: 0
+--- !u!114 &-3411564554519094943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 3a372bc1-8aa3-48dc-b84e-2ca5a040cdc5
+  m_EditorClassIdentifier: 
+  UniqueID: 3a372bc1-8aa3-48dc-b84e-2ca5a040cdc5
+  ChildNodes:
+  - a37016d7-613d-4d76-8ec2-ddbaf701fef6
+  Transform:
+    serializedVersion: 2
+    x: 173
+    y: 112
+    width: 300
+    height: 250
+  Text: Hey
+  IsPlayerNode: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: Lets make sure this is working
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -3411564554519094943}
+  - {fileID: -3784740957673259836}
+  - {fileID: 2620269521011762144}
+  - {fileID: -3942493955909073856}
+  - {fileID: 6822144005111100102}
+  - {fileID: 3470127246236330466}
+  EditorZoomAmount: 0.725375
+  EditorScrollPosition: {x: 771, y: 47}
+--- !u!114 &2620269521011762144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 811c15c8-9261-4fa3-9829-d84801020b19
+  m_EditorClassIdentifier: 
+  UniqueID: 811c15c8-9261-4fa3-9829-d84801020b19
+  ChildNodes:
+  - 4f4a63ad-c114-44f9-a336-70a6121f7040
+  Transform:
+    serializedVersion: 2
+    x: 1095.1367
+    y: 85.254425
+    width: 300
+    height: 250
+  Text: I am trying to see if this is set up properly
+  IsPlayerNode: 0
+--- !u!114 &3470127246236330466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: a3bd44fc-6d4e-4037-abe7-ce607980fbef
+  m_EditorClassIdentifier: 
+  UniqueID: a3bd44fc-6d4e-4037-abe7-ce607980fbef
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 1981.7004
+    y: 444.1121
+    width: 300
+    height: 250
+  Text: The random number was lower than one
+  IsPlayerNode: 0
+--- !u!114 &6822144005111100102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: a42ef125-7a36-428f-977d-e49a71bc5002
+  m_EditorClassIdentifier: 
+  UniqueID: a42ef125-7a36-428f-977d-e49a71bc5002
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 1981.7004
+    y: 59.97135
+    width: 300
+    height: 250
+  Text: The random number was higher than one
+  IsPlayerNode: 0

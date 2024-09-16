@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8916433131982019972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 1365953d-3f7f-4b9a-8b1c-b48dc4876fcc
+  m_EditorClassIdentifier: 
+  UniqueID: 1365953d-3f7f-4b9a-8b1c-b48dc4876fcc
+  ChildNodes:
+  - 2e140503-d304-4b00-92cc-85b24fd306d9
+  Transform:
+    serializedVersion: 2
+    x: 47.829548
+    y: 132.10112
+    width: 300
+    height: 250
+  Text: Hey there
+  IsPlayerNode: 0
+--- !u!114 &-8495117320047208904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: a463c17d-f8c1-4803-aa26-805fc3093e35
+  m_EditorClassIdentifier: 
+  UniqueID: a463c17d-f8c1-4803-aa26-805fc3093e35
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 2531.6335
+    y: 377.0444
+    width: 300
+    height: 250
+  Text: You fuck off!
+  IsPlayerNode: 0
+--- !u!114 &-6034124500182792704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: e521361a-b743-47c7-9490-aa1dcced3a3b
+  m_EditorClassIdentifier: 
+  UniqueID: e521361a-b743-47c7-9490-aa1dcced3a3b
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 1389.2609
+    y: 697.4181
+    width: 300
+    height: 250
+  Text: I'm gaving a bad day fuck off please
+  IsPlayerNode: 0
+--- !u!114 &-1953817736383957538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 9914ca13-9715-40e5-acde-bdd6e3d94aec
+  m_EditorClassIdentifier: 
+  UniqueID: 9914ca13-9715-40e5-acde-bdd6e3d94aec
+  ChildNodes:
+  - 86dacf29-f3e4-489c-b37f-c27e9a17c549
+  Transform:
+    serializedVersion: 2
+    x: 1913.0194
+    y: 57.914654
+    width: 300
+    height: 250
+  Text: Nice to meet you too
+  IsPlayerNode: 1
+--- !u!114 &-179744588454512310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 30d3ede7-c54a-43be-b8df-772ec666ed19
+  m_EditorClassIdentifier: 
+  UniqueID: 30d3ede7-c54a-43be-b8df-772ec666ed19
+  ChildNodes:
+  - a463c17d-f8c1-4803-aa26-805fc3093e35
+  Transform:
+    serializedVersion: 2
+    x: 1940.789
+    y: 461.18503
+    width: 300
+    height: 250
+  Text: Fuck off
+  IsPlayerNode: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: First dialogue
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -8916433131982019972}
+  - {fileID: 6493940794091786193}
+  - {fileID: 3625552688356645718}
+  - {fileID: -1953817736383957538}
+  - {fileID: -179744588454512310}
+  - {fileID: -8495117320047208904}
+  - {fileID: 5466442184826673982}
+  - {fileID: -6034124500182792704}
+  EditorZoomAmount: 0.72120917
+  EditorScrollPosition: {x: 301, y: 60}
+--- !u!114 &3625552688356645718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 39ab7b29-a585-40ae-b408-e77b7467832f
+  m_EditorClassIdentifier: 
+  UniqueID: 39ab7b29-a585-40ae-b408-e77b7467832f
+  ChildNodes:
+  - 9914ca13-9715-40e5-acde-bdd6e3d94aec
+  - 30d3ede7-c54a-43be-b8df-772ec666ed19
+  Transform:
+    serializedVersion: 2
+    x: 1323.0988
+    y: 155.07187
+    width: 300
+    height: 250
+  Text: Nice to meet you
+  IsPlayerNode: 0
+--- !u!114 &5466442184826673982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 86dacf29-f3e4-489c-b37f-c27e9a17c549
+  m_EditorClassIdentifier: 
+  UniqueID: 86dacf29-f3e4-489c-b37f-c27e9a17c549
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 2544.1047
+    y: 112.78896
+    width: 300
+    height: 250
+  Text: Well if you don't mind I have a lot of work to do
+  IsPlayerNode: 0
+--- !u!114 &6493940794091786193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef9b5d1533fb1347be68a0adafea138, type: 3}
+  m_Name: 2e140503-d304-4b00-92cc-85b24fd306d9
+  m_EditorClassIdentifier: 
+  UniqueID: 2e140503-d304-4b00-92cc-85b24fd306d9
+  ChildNodes:
+  - 39ab7b29-a585-40ae-b408-e77b7467832f
+  - e521361a-b743-47c7-9490-aa1dcced3a3b
+  Transform:
+    serializedVersion: 2
+    x: 805.3026
+    y: 446.81348
+    width: 300
+    height: 250
+  Conditions:
+  - {fileID: 11400000, guid: 7eb160622b0a32543b3c3ef4c4176228, type: 2}
