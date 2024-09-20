@@ -141,11 +141,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 2547558197927215316}
   nextNodeButton: {fileID: 6546896569061087354}
+  exitButton: {fileID: 2462861102959606054}
   aiText: {fileID: 4496423641044486800}
   playerResponseHolder: {fileID: 3925425472400168721}
-  responseUI: {fileID: 0}
+  responseUI: {fileID: 8572346064289114358}
   buttonHolder: {fileID: 4691351383073548103}
   playerResponseButtonPrefab: {fileID: 5593515938058991784, guid: 562adaf7c8e031d4d9b90628105a3d19,
+    type: 3}
+  playerDialogueSelectButtonPrefab: {fileID: 5593515938058991784, guid: 8ad59df45da16434f97e99f2b5ea098a,
     type: 3}
 --- !u!1 &2060437110096237450
 GameObject:
@@ -268,7 +271,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6300709850523282702}
   m_Direction: 2
   m_Value: 1.0000005
-  m_Size: 0.086492844
+  m_Size: 0.08649285
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -368,10 +371,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 20
+    m_Right: 20
+    m_Top: 20
+    m_Bottom: 20
   m_ChildAlignment: 0
   m_Spacing: 35
   m_ChildForceExpandWidth: 1
@@ -449,9 +452,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 2.5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0

@@ -149,9 +149,9 @@ GameObject:
   - component: {fileID: 1947090123781604636}
   - component: {fileID: 4932669140063894253}
   - component: {fileID: 1526130704576118373}
-  - component: {fileID: -4873970846862346217}
+  - component: {fileID: -8621806029290172196}
   m_Layer: 0
-  m_Name: PlayerChoiceButton
+  m_Name: PlayerDialogueTreeSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
---- !u!114 &-4873970846862346217
+--- !u!114 &-8621806029290172196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5593515938058991784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1a03c0d962fb942ad236f8d8e72e60, type: 3}
+  m_Script: {fileID: 11500000, guid: 031daff15635df6459cb24ac5cbd406c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choiceText: {fileID: 5200541051213030655}
+  buttonText: {fileID: 5200541051213030655}

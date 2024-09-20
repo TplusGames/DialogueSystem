@@ -7,11 +7,11 @@ namespace TPlus.Dialogue
     {
         public override bool HasPassedCheck(PlayerConversant player)
         {
-            var randomInt = Random.Range(1, 3);
+            var randomInt = Random.Range(0, 99);
 
             Debug.Log("Random int = " + randomInt);
             
-            if (randomInt == 1)
+            if (randomInt < 50)
             {
                 return false;
             }

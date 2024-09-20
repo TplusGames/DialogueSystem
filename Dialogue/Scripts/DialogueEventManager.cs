@@ -17,11 +17,25 @@ namespace TPlus.Dialogue
             Destroy(gameObject);
         }
 
-        public delegate void DialogueActivated();
+        public delegate void DialogueActivated(Dialogue dialogue);
         public event DialogueActivated OnDialogueActivated;
-        public void InvokeOnDialogueActivated()
+        public void InvokeOnDialogueActivated(Dialogue dialogue)
         {
-            OnDialogueActivated?.Invoke();
+            OnDialogueActivated?.Invoke(dialogue);
+        }
+
+        public delegate void DialogueSelected(Dialogue dialogue);
+        public event DialogueSelected OnDialogueSelected;
+        public void InvokeOnDialogueSelected(Dialogue dialogue)
+        {
+            OnDialogueSelected?.Invoke(dialogue);
+        }
+
+        public delegate void DialogueUIClosed();
+        public event DialogueUIClosed OnDialogueUIClosed;
+        public void InvokeOnDialogueUIClosed()
+        {
+            OnDialogueUIClosed?.Invoke();
         }
 
         public delegate void DialogueTextNodeActivated(DialogueNode_Text textNode);
@@ -59,9 +73,9 @@ namespace TPlus.Dialogue
             OnNextNodeButtonClicked?.Invoke();
         }
 
-        public delegate void PlayerDialogueChoiceSelected(DialogueNode node);
+        public delegate void PlayerDialogueChoiceSelected(DialogueNode_Text node);
         public event PlayerDialogueChoiceSelected OnPlayerDialogueChoiceSelected;
-        public void InvokeOnPlayerDialogueChoiceSelected(DialogueNode node)
+        public void InvokeOnPlayerDialogueChoiceSelected(DialogueNode_Text node)
         {
             OnPlayerDialogueChoiceSelected?.Invoke(node);
         }

@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueEvent : MonoBehaviour
+namespace TPlus.Dialogue
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DialogueEvent : ScriptableObject 
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public virtual void BroadcastEvent(object obj)
+        {
+            
+        }
     }
 }
+

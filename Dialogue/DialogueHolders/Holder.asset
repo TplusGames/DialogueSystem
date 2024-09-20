@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6323316216041275037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 3f35e0ff-c6bd-4914-87b1-c87f486e8fa1
+  m_EditorClassIdentifier: 
+  UniqueID: 3f35e0ff-c6bd-4914-87b1-c87f486e8fa1
+  ChildNodes:
+  - 1194f1d3-c3f1-4033-8524-d373d3b5a1db
+  Transform:
+    serializedVersion: 2
+    x: 747.23486
+    y: 239.23782
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: 'Fucking '
+  IsPlayerNode: 0
+  Events: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f779ae516cf54eaf8bf5ba4fb4fc8, type: 3}
+  m_Name: Holder
+  m_EditorClassIdentifier: 
+  UniqueID: 
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 0}
+  Text: 
+  IsPlayerNode: 1
+  Events: []
+  nodes:
+  - {fileID: 7512647995237685845}
+  - {fileID: -6323316216041275037}
+  - {fileID: 7667588213919924531}
+--- !u!114 &7512647995237685845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 96891a0f-0901-433a-8664-00bb1d41980f
+  m_EditorClassIdentifier: 
+  UniqueID: 96891a0f-0901-433a-8664-00bb1d41980f
+  ChildNodes:
+  - 3f35e0ff-c6bd-4914-87b1-c87f486e8fa1
+  Transform:
+    serializedVersion: 2
+    x: 245.45178
+    y: 135.67166
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: Please
+  IsPlayerNode: 0
+  Events: []
+--- !u!114 &7667588213919924531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 1194f1d3-c3f1-4033-8524-d373d3b5a1db
+  m_EditorClassIdentifier: 
+  UniqueID: 1194f1d3-c3f1-4033-8524-d373d3b5a1db
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 1139.2378
+    y: 101.494835
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: Work
+  IsPlayerNode: 0
+  Events: []

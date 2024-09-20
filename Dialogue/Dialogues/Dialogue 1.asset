@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7492187093613415124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 1fb19c9e-750f-41e7-98ec-011773824ddd
+  m_EditorClassIdentifier: 
+  UniqueID: 1fb19c9e-750f-41e7-98ec-011773824ddd
+  ChildNodes:
+  - 048bf9dc-e24c-47aa-9a76-cbdb1b35fedd
+  Transform:
+    serializedVersion: 2
+    x: 301
+    y: 109
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: This is the first dialogue
+  IsPlayerNode: 0
+  Events: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: Dialogue 1
+  m_EditorClassIdentifier: 
+  UniqueID: Dialogue 1
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 0}
+  Text: 
+  IsPlayerNode: 1
+  Events: []
+  nodes:
+  - {fileID: -7492187093613415124}
+  - {fileID: 2934182269543314186}
+--- !u!114 &2934182269543314186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 048bf9dc-e24c-47aa-9a76-cbdb1b35fedd
+  m_EditorClassIdentifier: 
+  UniqueID: 048bf9dc-e24c-47aa-9a76-cbdb1b35fedd
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 751
+    y: 202
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: Cool
+  IsPlayerNode: 1
+  Events:
+  - {fileID: 11400000, guid: 96704ed65f6f80043bf2c2a422a17e2f, type: 2}
+  - {fileID: 11400000, guid: 16e6ad9735c9b53428cd3e33a317c640, type: 2}

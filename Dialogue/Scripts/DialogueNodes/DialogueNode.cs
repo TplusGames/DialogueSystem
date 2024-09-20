@@ -1,6 +1,5 @@
 
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace TPlus.Dialogue
@@ -20,8 +19,6 @@ namespace TPlus.Dialogue
             {
                 ChildNodes.Add(name);
             }
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssets();
         }
 
         public void RemoveChildNode(string name)
@@ -30,14 +27,6 @@ namespace TPlus.Dialogue
             {
                 ChildNodes.Remove(name);
             }
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssets();
-        }
-
-        public virtual void SaveNodeChanges()
-        {
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssetIfDirty(this);
         }
 
         public virtual List<string> GetAllChildren() { return ChildNodes; }

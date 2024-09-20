@@ -1,32 +1,29 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEditor;
-using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace TPlus.Dialogue
 {
-    [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/New Dialogue", order = 0)]
-    public class Dialogue : ScriptableObject
+    public class Dialogue : DialogueNode_Text
     {
         [SerializeField] private List<DialogueNode> nodes = new List<DialogueNode>();
         private Dictionary<string, DialogueNode> nodeDictionary = new Dictionary<string, DialogueNode>();
-
-        public float EditorZoomAmount = 1f;
-        public Vector2 EditorScrollPosition;
+        public float EditorZoomAmount { get; set; } = 1f;
+        public Vector2 EditorScrollPosition { get; set; }
 
         private void OnEnable()
         {
             UpdateDictionary();
         }
 
-        private void UpdateDictionary()
+        protected void UpdateDictionary()
         {
             nodeDictionary.Clear();
             foreach (DialogueNode node in nodes)
             {
-                if (String.IsNullOrEmpty(node.UniqueID))
+                if (string.IsNullOrEmpty(node.UniqueID))
                 {
                     Debug.LogError("Node has no ID!!");
                     continue;
@@ -42,22 +39,26 @@ namespace TPlus.Dialogue
         }
 
 
-        public void CreateRootNode()
+        public virtual DialogueNode CreateRootNode()
         {
-            var rootNode = CreateNewTextNode();
+            nodes.Clear();
+            var rootNode = CreateNewTextNode(); 
+            return rootNode;
         }
 
         public DialogueNode CreateNewTextNode()
         {
-            var randomID = Guid.NewGuid().ToString();
             DialogueNode_Text node = CreateInstance(nameof(DialogueNode_Text)) as DialogueNode_Text;
+            node.ParentDialogue = this;
             InitializeNodeAsset(node);
+            IsPlayerNode = true;
             return node;
         }
 
         public DialogueNode_Condition CreateNewConditionNode()
         {
             DialogueNode_Condition node = CreateInstance(nameof(DialogueNode_Condition)) as DialogueNode_Condition;
+            node.Dialogue = this;
             InitializeNodeAsset(node);
             return node;
         }
@@ -68,10 +69,7 @@ namespace TPlus.Dialogue
             node.UniqueID = randomID;
             node.name = randomID;
             nodes.Add(node);
-            AssetDatabase.AddObjectToAsset(node, this);
-            AssetDatabase.SaveAssets();
             UpdateDictionary();
-            Undo.RegisterCreatedObjectUndo(node, "create node");
         }
 
         public void DeleteNode(DialogueNode node)
@@ -89,13 +87,10 @@ namespace TPlus.Dialogue
                 }
             }
             nodes.Remove(node);
-            AssetDatabase.RemoveObjectFromAsset(node);
-            AssetDatabase.DeleteAsset($"Assets/Dialogue/{node.name}.asset");
-            AssetDatabase.SaveAssets();
             UpdateDictionary();
         }
 
-        public void CreateChildTextNode(DialogueNode parent)
+        public DialogueNode CreateChildTextNode(DialogueNode parent)
         {
             var childNode = CreateNewTextNode();
             parent.AddChildNode(childNode.name);
@@ -103,6 +98,7 @@ namespace TPlus.Dialogue
             var childPosition = parent.Transform.position + new Vector2(nodeWidth * 1.5f, 0);
             childNode.Transform.position = childPosition;
             UpdateDictionary();
+            return childNode;
         }
 
         public void LinkNode(DialogueNode parent, string child)
@@ -152,17 +148,16 @@ namespace TPlus.Dialogue
         }
 
         public static Dialogue CreateNewDialogue(string name)
-        {
-            if (File.Exists($"Assets/Dialogue/Dialogues/{name}.asset"))
-            {
-                Debug.LogWarning($"Asset with name '{name}' already exists!");
-                return null;
-            }
-
+        { 
             var newDialogue = CreateInstance<Dialogue>();
-            AssetDatabase.CreateAsset(newDialogue, $"Assets/Dialogue/Dialogues/{name}.asset");
-            newDialogue.CreateRootNode();
+            newDialogue.UniqueID = name;
             return newDialogue;
+        }
+
+        public override void PerformNode()
+        {
+            base.PerformNode();
+            DialogueEventManager.Instance.InvokeOnDialogueActivated(this);
         }
     }
 }

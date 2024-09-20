@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace TPlus.Dialogue
 {
-    public class DialogueNode_Condition : DialogueNode
+     public class DialogueNode_Condition : DialogueNode
     {
+        public Dialogue Dialogue;
         public List<DialogueCondition> Conditions = new List<DialogueCondition>();
         
         public override void PerformNode()

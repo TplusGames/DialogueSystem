@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3504906067299914293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: f2283275-0251-4f4c-9cdb-f0773fc0293d
+  m_EditorClassIdentifier: 
+  UniqueID: f2283275-0251-4f4c-9cdb-f0773fc0293d
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 670
+    y: 174
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: Sweet
+  IsPlayerNode: 1
+  Events:
+  - {fileID: 11400000, guid: 16e6ad9735c9b53428cd3e33a317c640, type: 2}
+  - {fileID: 11400000, guid: 96704ed65f6f80043bf2c2a422a17e2f, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837d8d5f15ba0c47936e884e3ff0273, type: 3}
+  m_Name: Dialogue 2
+  m_EditorClassIdentifier: 
+  UniqueID: Dialogue 2
+  ChildNodes: []
+  Transform:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 0}
+  Text: 
+  IsPlayerNode: 1
+  Events: []
+  nodes:
+  - {fileID: 8176839800206229920}
+  - {fileID: -3504906067299914293}
+--- !u!114 &8176839800206229920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b880c81a1a918e1418906bc3f6bec0ec, type: 3}
+  m_Name: 98c57609-e911-4ac6-8987-9a64fe47a6c6
+  m_EditorClassIdentifier: 
+  UniqueID: 98c57609-e911-4ac6-8987-9a64fe47a6c6
+  ChildNodes:
+  - f2283275-0251-4f4c-9cdb-f0773fc0293d
+  Transform:
+    serializedVersion: 2
+    x: 183
+    y: 124
+    width: 300
+    height: 250
+  ParentDialogue: {fileID: 11400000}
+  Text: This is the second dialogue
+  IsPlayerNode: 0
+  Events: []

@@ -2,14 +2,14 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
+using System.IO;
 
 namespace TPlus.Dialogue.Editor
 {
     public class DialogueEditor : EditorWindow
     {
         private static Dialogue _dialogue;
+        private static Dialogue _previousDialogue;
         private static GUIStyle _nodeStyle;
         private static Vector2 _mouseOffset = Vector2.zero;
         private static Vector2 _draggingOffset;
@@ -17,11 +17,13 @@ namespace TPlus.Dialogue.Editor
         private static float _maxZoom = 1f;
         private static bool _draggingCanvas;
         private static bool _creatingDialogue;
+        private static bool _linkingDialogue;
         private static bool _hasDialogueCreationNameError;
         private static string _newDialogueName;
         private static Texture2D _npcNodeTexture;
         private static Texture2D _playerNodeTexture;
         private static Texture2D _conditionNodeTexture;
+        private static Texture2D _dialogueTexture;
 
         private static DialogueNode _draggingNode;
         private static DialogueNode _connectingNode;
@@ -73,6 +75,7 @@ namespace TPlus.Dialogue.Editor
             _playerNodeTexture = MakeColoredTexture(20, 20, Color.blue);
             _npcNodeTexture = MakeColoredTexture(20, 20, Color.gray);
             _conditionNodeTexture = MakeColoredTexture(20, 20, Color.yellow);
+            _dialogueTexture = MakeColoredTexture(20, 20, Color.black);
             _nodeStyle = new GUIStyle
             {
                 padding = new RectOffset(20, 20, 20, 20),
@@ -100,6 +103,7 @@ namespace TPlus.Dialogue.Editor
 
             if(_dialogue != null)
             {
+                _linkingDialogue = false;
                 ShowEditorWindow();
                 return true;
             }
@@ -111,6 +115,8 @@ namespace TPlus.Dialogue.Editor
         {
             if (Selection.activeObject is Dialogue dialogue)
             {
+                if (_dialogue is DialogueHolder holder) return;
+                _previousDialogue = _dialogue;
                 _dialogue = dialogue;
                 Repaint();
             }
@@ -221,13 +227,39 @@ namespace TPlus.Dialogue.Editor
         #region DrawDisplay
         private void OnGUI()
         {
-            DrawCreateDialogueButtons();
+            if (!_linkingDialogue)
+            {
+                DrawCreateDialogueButtons();
+            }
+            else
+            {
+                OpenLinkDialogueMenu(_dialogue as DialogueHolder);
+            }
+            
             if (_dialogue == null)
             {
                 EditorGUILayout.LabelField("No dialogue selected");
             }
-            else if (!_creatingDialogue)
+            else if (!_creatingDialogue && !_linkingDialogue)
             {
+                if (_previousDialogue != null && GUILayout.Button("Back"))
+                {
+                    _dialogue = _previousDialogue;
+                    Selection.activeObject = _previousDialogue;
+                    Repaint();
+                }
+                if (_connectingNode != null || _disconnectingNode != null)
+                {
+                    if (GUILayout.Button("Cancel link"))
+                    {
+                        _disconnectingNode = null;
+                        _connectingNode = null;
+                    }
+                }
+                if (_dialogue is DialogueHolder holder)
+                {
+                    DrawLinkDialogueButton(holder);
+                }
                 DrawCreateConditionNodeButton();
                 HandleZoomInput(_dialogue);
                 ProcessEvents();
@@ -281,10 +313,22 @@ namespace TPlus.Dialogue.Editor
             }
         }
 
+        private static void DrawLinkDialogueButton(DialogueHolder holder)
+        {
+            if (_linkingDialogue)
+            {
+                OpenLinkDialogueMenu(holder);
+            }
+            else if (GUILayout.Button("Link dialogue to holder"))
+            {
+                _linkingDialogue = true;
+            }
+        }
+
         private static void OpenCreateDialogueMenu()
         {
             _newDialogueName = EditorGUILayout.TextField(_newDialogueName);
-            if (GUILayout.Button("Create"))
+            if (GUILayout.Button("Create Dialogue"))
             {
                 if (!TryCreateNewDialogue())
                 {
@@ -294,6 +338,18 @@ namespace TPlus.Dialogue.Editor
                 CloseCreateDialogueMenu();
                 return;
             }
+            
+            if (GUILayout.Button("Create Dialogue Holder"))
+            {
+                if (!TryCreateNewDialogueHolder())
+                {
+                    _hasDialogueCreationNameError = true;
+                    return;
+                }
+                CloseCreateDialogueMenu();
+                return;
+            }
+            
             if (GUILayout.Button("Cancel"))
             {
                 CloseCreateDialogueMenu();
@@ -308,6 +364,21 @@ namespace TPlus.Dialogue.Editor
         {
             _creatingDialogue = false;
             _hasDialogueCreationNameError = false;
+        }
+
+        private static void OpenLinkDialogueMenu(DialogueHolder holder)
+        {
+            if (GUILayout.Button("Back"))
+            {
+                _linkingDialogue = false;
+            }
+            SerializedObject serializedHolder = new SerializedObject(holder);
+            var nodes = serializedHolder.FindProperty("nodes");
+            EditorGUILayout.PropertyField(nodes, true);
+            if (serializedHolder.ApplyModifiedProperties())
+            {
+                SaveNodeChanges(holder);
+            }
         }
 
         private static void HandleScrollView()
@@ -355,7 +426,6 @@ namespace TPlus.Dialogue.Editor
         private static void DrawNodeBackground(DialogueNode node, GUIStyle nodeStyle)
         {
             //Create visual square in editor for each node in dialogue
-            Debug.Log("Drawing node backgroun");
             var oldRect = node.Transform;
             var scaledRect = new Rect(oldRect.x * _dialogue.EditorZoomAmount, oldRect.y * _dialogue.EditorZoomAmount,
                 oldRect.width * _dialogue.EditorZoomAmount, oldRect.height * _dialogue.EditorZoomAmount);
@@ -364,7 +434,11 @@ namespace TPlus.Dialogue.Editor
 
         private static void DetermineNodeDisplayType(DialogueNode node)
         {
-            if (node is DialogueNode_Text textNode)
+            if (node is Dialogue dialogue)
+            {
+                DrawDialogueNode(dialogue);
+            }
+            else if (node is DialogueNode_Text textNode)
             {
                 DrawTextNode(textNode);
             }
@@ -372,6 +446,23 @@ namespace TPlus.Dialogue.Editor
             {
                 DrawConditionNode(conditionNode);
             }
+        }
+        
+        private static void DrawDialogueNode(Dialogue node)
+        {
+            var newNodeStyle = _nodeStyle;
+            newNodeStyle.normal.background = _dialogueTexture;
+            DrawNodeBackground(node, newNodeStyle);
+            GenerateTextFields(node);
+
+            if (GUILayout.Button("Open dialogue"))
+            {
+                _dialogue = node;
+                Selection.activeObject = node;
+            }
+            
+            var isNotLinking = (_connectingNode == null && _disconnectingNode == null);
+            DrawLinkingButtons(node, true);
         }
 
         private static void DrawTextNode(DialogueNode_Text node)
@@ -385,6 +476,7 @@ namespace TPlus.Dialogue.Editor
             var isNotLinking = (_connectingNode == null && _disconnectingNode == null);
             DrawCreateAndDeleteButton(node, isNotLinking);
             DrawLinkingButtons(node, true);
+            DrawNodeEvents(node);
         }
 
         private static void DrawConditionNode(DialogueNode_Condition conditionNode)
@@ -409,12 +501,22 @@ namespace TPlus.Dialogue.Editor
             serializedNode.ApplyModifiedProperties();
         }
 
+        private static void DrawNodeEvents(DialogueNode_Text textNode)
+        {
+            var serializedNode = new SerializedObject(textNode);
+            EditorGUILayout.PropertyField(serializedNode.FindProperty("Events"), true);
+            serializedNode.ApplyModifiedProperties();
+        }
+
         private static void DrawDeleteButton(DialogueNode node)
         {
             if (GUILayout.Button("-"))
             {
+                AssetDatabase.RemoveObjectFromAsset(node);
                 Undo.RecordObject(_dialogue, "delete node");
                 _dialogue.DeleteNode(node);
+                SaveNode(_dialogue);
+                SaveNode(node);
             }
         }
 
@@ -423,7 +525,9 @@ namespace TPlus.Dialogue.Editor
             if (GUILayout.Button("+"))
             {
                 Undo.RecordObject(_dialogue, "add node");
-                _dialogue.CreateChildTextNode(node);
+                var newNode = _dialogue.CreateChildTextNode(node);
+                AssetDatabase.AddObjectToAsset(newNode, _dialogue);
+                SaveNode(newNode);
             }
         }
 
@@ -464,6 +568,7 @@ namespace TPlus.Dialogue.Editor
                 {
                     Undo.RecordObject(_dialogue, "unlink nodes");
                     _dialogue.UnlinkNode(_disconnectingNode, node.UniqueID);
+                    SaveNode(_dialogue);
                     _disconnectingNode = null;
                 }
             }
@@ -486,6 +591,7 @@ namespace TPlus.Dialogue.Editor
                 {
                     Undo.RecordObject(_dialogue, "link nodes");
                     _dialogue.LinkNode(_connectingNode, node.UniqueID);
+                    SaveNode(_connectingNode);
                     _connectingNode = null;
                 }
             }
@@ -550,18 +656,56 @@ namespace TPlus.Dialogue.Editor
 
         private static bool TryCreateNewDialogue()
         {
+            if (File.Exists($"Assets/GameMechanics/Dialogue/Dialogues/{_newDialogueName}.asset"))
+            {
+                return false;
+            }
             _dialogue = Dialogue.CreateNewDialogue(_newDialogueName);
             if (_dialogue != null)
             {
+                AssetDatabase.CreateAsset(_dialogue, $"Assets/GameMechanics/Dialogue/Dialogues/{_newDialogueName}.asset");
+                var rootNode = _dialogue.CreateRootNode();
+                AssetDatabase.AddObjectToAsset(rootNode, _dialogue);
+                SaveNode(_dialogue); 
                 Undo.RegisterCreatedObjectUndo(_dialogue, "create new dialogue");
                 return true;
             }
+            
+            return false;
+        }
+        
+        private static bool TryCreateNewDialogueHolder()
+        {
+            if (File.Exists($"Assets/Dialogue/GameMechanics/DialogueHolders/{_newDialogueName}.asset"))
+            {
+                return false;
+            }
+            _dialogue = DialogueHolder.CreateNewDialogueHolder(_newDialogueName);
+            if (_dialogue != null)
+            {
+                AssetDatabase.CreateAsset(_dialogue, $"Assets/GameMechanics/Dialogue/DialogueHolders/{_newDialogueName}.asset");
+                var rootNode = _dialogue.CreateRootNode();
+                AssetDatabase.AddObjectToAsset(rootNode, _dialogue);
+                SaveNode(_dialogue);
+                Undo.RegisterCreatedObjectUndo(_dialogue, "create new dialogue holder");
+                return true;
+            }
+            
             return false;
         }
 
         private static void CreateConditionNode()
         {
-            _dialogue.CreateNewConditionNode();
+            var node = _dialogue.CreateNewConditionNode();
+            SaveNode(node);
+            AssetDatabase.AddObjectToAsset(node, _dialogue);
+        }
+
+        private static void SaveNode(DialogueNode node)
+        {
+            Debug.Log("Node saved");
+            EditorUtility.SetDirty(node);
+            AssetDatabase.SaveAssets();
         }
     }
 }

@@ -9,18 +9,22 @@ namespace TPlus.Dialogue.UI
     {
         [SerializeField] private GameObject dialogueUI;
         [SerializeField] private Button nextNodeButton;
+        [SerializeField] private Button exitButton;
         [SerializeField] private TextMeshProUGUI aiText;
         [SerializeField] private Transform playerResponseHolder;
         [SerializeField] private Transform responseUI;
         [SerializeField] private Transform buttonHolder;
         [SerializeField] private GameObject playerResponseButtonPrefab;
+        [SerializeField] private GameObject playerDialogueSelectButtonPrefab;
 
         private List<PlayerChoiceButton> playerResponseButtons = new List<PlayerChoiceButton>();
+        private List<PlayerDialogueTreeSelectButton> playerDialogueSelectButtons = new List<PlayerDialogueTreeSelectButton>();
         
         private void Start()
         {
             ToggleCallbackConnections(true);
             nextNodeButton.onClick.AddListener(OnNextNodeButtonClicked);
+            exitButton.onClick.AddListener(OnCloseButtonClicked);
             ToggleNextButtonActive(false);
             ToggleResponseUI(false);
             ToggleDialogueUI(false);
@@ -38,16 +42,23 @@ namespace TPlus.Dialogue.UI
                 DialogueEventManager.Instance.OnDialogueTextNodeActivated += DisplayText;
                 DialogueEventManager.Instance.OnNextNodeButtonToggled += ToggleNextButtonActive;
                 DialogueEventManager.Instance.OnDialogueActivated += OnDialogueActivated;
+                DialogueEventManager.Instance.OnDialogueUIClosed += OnDialogueClosed;
                 return;
             }
             DialogueEventManager.Instance.OnDialogueTextNodeActivated -= DisplayText;
             DialogueEventManager.Instance.OnNextNodeButtonToggled -= ToggleNextButtonActive;
             DialogueEventManager.Instance.OnDialogueActivated -= OnDialogueActivated;
+            DialogueEventManager.Instance.OnDialogueUIClosed -= OnDialogueClosed;
         }
 
-        private void OnDialogueActivated()
+        private void OnDialogueActivated(Dialogue dialogue)
         {
             ToggleDialogueUI(true);
+        }
+
+        private void OnDialogueClosed()
+        {
+            ToggleDialogueUI(false);
         }
 
         private void ToggleDialogueUI(bool isActive)
@@ -80,24 +91,37 @@ namespace TPlus.Dialogue.UI
             }
         }
 
-        private void CleanPlayerResponses()
+        private void ClearPlayerResponses()
         {
             for (int i = playerResponseButtons.Count - 1; i >= 0; i--)
             {
                 Destroy(playerResponseButtons[i].gameObject);
             }
             playerResponseButtons.Clear();
+
+            for (int i = playerDialogueSelectButtons.Count - 1; i >= 0; i--)
+            {
+                Destroy(playerDialogueSelectButtons[i].gameObject);
+            }
+            playerDialogueSelectButtons.Clear();
         }
 
         private void ActivateNPCTextNode(DialogueNode_Text textNode)
         {
-            CleanPlayerResponses();
+            ClearPlayerResponses();
             aiText.text = textNode.Text;
         }
 
         private void ActivatePlayerTextNode(DialogueNode_Text textNode)
         {
             ToggleResponseUI(true);
+            if (textNode is Dialogue dialogue)
+            {
+                var newDialogueButton = Instantiate(playerDialogueSelectButtonPrefab, playerResponseHolder).GetComponent<PlayerDialogueTreeSelectButton>();
+                newDialogueButton.SetDialogue(dialogue);
+                playerDialogueSelectButtons.Add(newDialogueButton);
+                return;
+            }
             var newChoiceButton = Instantiate(playerResponseButtonPrefab, playerResponseHolder).GetComponent<PlayerChoiceButton>();
             newChoiceButton.SetNode(textNode);
             playerResponseButtons.Add(newChoiceButton);
@@ -115,7 +139,8 @@ namespace TPlus.Dialogue.UI
 
         private void OnCloseButtonClicked()
         {
-            
+            DialogueEventManager.Instance.InvokeOnDialogueUIClosed();
+            MasterEventManager.Instance.InvokeOnGameStateChangeTriggered(EGameState.Standard);
         }
     }
 }
